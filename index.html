@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+border-radius: 50%;
+font-size: 44px;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 0 5px rgb(140, 140, 140);
+font-weight: 600;
+user-select: none;
+cursor: pointer;
+position: absolute;
+background-size: cover;
+
+        }
+        .wrap{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+            padding: 150px 30%;
+        }
+        .text{
+            font-size: 32px;
+            color: blue;
+            font-weight: 600;
+           
+         
+        }
+        input{
+        border: none;
+        border-bottom: 1px solid black;
+        height: 22px;
+        font-size: 16px;
+        outline: none;
+        }
+        button{
+            width: 120px;
+            height: 32px;
+            font-size: 28px;
+font-weight: 600;
+background-color: rgb(105, 105, 251);
+border: none;
+border-radius: 10px;
+cursor: pointer;
+        }
+        .changeImage{
+            width: 20px;
+            height: 20px;
+            display: none;
+            cursor: pointer;
+            background-color: red;
+            z-index: 3;
+            margin-left: 70px;
+        }
+        .icon{
+            width: 100px;
+            height: 100px;
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .userName{
+            position: absolute;
+            margin-top: 120px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+
+        }
+        @media screen and (max-width:650px){
+            .wrap{
+          
+            padding: 150px 10px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="text">Generate your icon</div>
+        <div class="icon">
+            <div class="changeImage"></div>
+            <div class="box">
+          
+            </div>
+            <div class="userName"></div>
+        </div>
+  
+        <input type="text" id="inpName" class="inp" placeholder="Enter your name">
+        <input type="text" id="inpSurame" class="inp" placeholder="Enter your surname">
+        <div class="block">
+            <button class="confirm" id="confirm">Confirm</button>
+        </div>
+      
+    </div>
+
+    <script>
+        let changeText=0
+$('.changeImage').click(function(){
+    
+    let url =prompt('enter url img')
+    console.log(url)
+    if(url.length>0){
+        $('.box').css('backgroundImage','url('+url+')')
+    $('.box').html('')
+    $('.userName').html(inpName.value+' '+inpSurame.value)
+    localStorage.setItem('fullText_ls',inpName.value+' '+inpSurame.value)
+    localStorage.setItem('image_ls',url)
+    localStorage.setItem('nameText_ls',inpName.value)
+    localStorage.setItem('surnameText_ls',inpSurame.value)
+    localStorage.setItem('textIcon_ls','')
+    localStorage.setItem('colorIcon_ls','')
+    }
+})
+$('.box').mouseenter(function(){
+    $('.changeImage').css('display','flex')
+})
+$('.box').mouseleave(function(){
+    $('.changeImage').css('display','none')
+})
+$('.changeImage').mouseenter(function(){
+    $('.changeImage').css('display','flex')
+})
+$('.changeImage').mouseleave(function(){
+    $('.changeImage').css('display','none')
+})
+$('.confirm').click(function(){
+    $('.icon').css('display','flex')
+    $('.inp').css('display','none')
+    $('.inp').css('display','none')
+    $('.confirm').css('display','none')
+})
+$('.box').click(function(){
+    $('.icon').css('display','none')
+    $('.inp').css('display','flex')
+    $('.inp').css('display','flex')
+    $('.confirm').css('display','flex')
+})
+
+$('.userName').click(function(){
+    $('.icon').css('display','none')
+    $('.inp').css('display','flex')
+    $('.inp').css('display','flex')
+    $('.confirm').css('display','flex')
+    changeText=1
+})
+        
+function genAvatar(name, surname){
+    let firstLetterOfName
+let firstLetterOfSurname
+    if(name.length>0 && surname.length>0){
+        firstLetterOfName=name.substring(0,1).toUpperCase()
+        firstLetterOfSurname=surname.substring(0,1).toUpperCase()
+    }else{
+        firstLetterOfName='U'
+        firstLetterOfSurname='R'
+    }
+
+let data =firstLetterOfName+firstLetterOfSurname
+let color ='rgb('+Math.round((Math.random()*236)+20) +','+Math.round((Math.random()*236)+20) +','+Math.round((Math.random()*236)+20) +')'
+let masuv =[]
+masuv.push(data)
+masuv.push(color)
+return masuv
+}
+console.log(genAvatar('Vitalik', 'Myckhaliko'))
+
+    console.log(genAvatar(inpName.value, inpSurame.value))
+    let ch1=localStorage.getItem('colorIcon_ls') || []
+    let ch2=localStorage.getItem('textIcon_ls') || []
+    let ch3= localStorage.getItem('image_ls') || []
+    let ch4=localStorage.getItem('fullText_ls') || []
+    if(ch1.length>0 || ch2.length>0 || ch3.length>0 || ch4.length>0){
+        $('.box').css('backgroundColor', localStorage.getItem('colorIcon_ls'))
+    $('.box').html( localStorage.getItem('textIcon_ls'))
+    $('.box').css('backgroundImage','url('+ localStorage.getItem('image_ls')+')')
+
+console.log('no')
+    $('.userName').html( localStorage.getItem('fullText_ls'))
+
+    inpName.value=localStorage.getItem('nameText_ls')
+    inpSurame.value = localStorage.getItem('surnameText_ls')
+    
+    $('.icon').css('display','flex')
+    $('.inp').css('display','none')
+    $('.inp').css('display','none')
+    $('.confirm').css('display','none')
+    }
+
+
+
+
+
+$('#confirm').click(function(){
+    console.log('no')
+    if(changeText==0){
+  
+   let func=genAvatar(inpName.value, inpSurame.value)
+    $('.box').css('backgroundColor',func[1])
+    $('.box').html(func[0])
+    localStorage.setItem('textIcon_ls',func[0])
+    localStorage.setItem('colorIcon_ls',func[1])
+    localStorage.setItem('fullText_ls','')
+    localStorage.setItem('image_ls','')
+    localStorage.setItem('nameText_ls',inpName.value)
+    localStorage.setItem('surnameText_ls',inpSurame.value)
+    $('.box').css('backgroundImage','')
+    $('.userName').html('')
+    }
+
+    if(changeText==1){
+        $('.userName').html(inpName.value+' '+inpSurame.value)
+    changeText=0
+    localStorage.setItem('fullText_ls',inpName.value+' '+inpSurame.value)
+    localStorage.setItem('image_ls',url)
+    localStorage.setItem('nameText_ls','')
+    localStorage.setItem('surnameText_ls','')
+    localStorage.setItem('nameText_ls',inpName.value)
+    localStorage.setItem('surnameText_ls',inpSurame.value)
+    localStorage.setItem('textIcon_ls','')
+    localStorage.setItem('colorIcon_ls','')
+    }
+
+})
+confirm.onclick = function(){
+    console.log('yes')
+// console.log(genAvatar(inpName.value, inpSurame.value))
+}
+    </script>
+</body>
+</html>
