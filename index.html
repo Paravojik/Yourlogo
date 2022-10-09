@@ -70,6 +70,16 @@ cursor: pointer;
             z-index: 3;
             margin-left: 70px;
         }
+        .changeImage2{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            display: none;
+            cursor: pointer;
+            background-color: red;
+            z-index: 3;
+            margin-left: 70px;
+        }
         .icon{
             width: 100px;
             height: 100px;
@@ -89,6 +99,9 @@ cursor: pointer;
           
             padding: 150px 10px;
         }
+        .changeImage2{
+            display: flex;
+        }
         }
     </style>
 </head>
@@ -97,6 +110,7 @@ cursor: pointer;
         <div class="text">Generate your icon</div>
         <div class="icon">
             <div class="changeImage"></div>
+            <div class="changeImage2"></div>
             <div class="box">
           
             </div>
@@ -113,6 +127,22 @@ cursor: pointer;
 
     <script>
         let changeText=0
+        $('.changeImage2').click(function(){
+    
+    let url =prompt('enter url img')
+    console.log(url)
+    if(url.length>0){
+        $('.box').css('backgroundImage','url('+url+')')
+    $('.box').html('')
+    $('.userName').html(inpName.value+' '+inpSurame.value)
+    localStorage.setItem('fullText_ls',inpName.value+' '+inpSurame.value)
+    localStorage.setItem('image_ls',url)
+    localStorage.setItem('nameText_ls',inpName.value)
+    localStorage.setItem('surnameText_ls',inpSurame.value)
+    localStorage.setItem('textIcon_ls','')
+    localStorage.setItem('colorIcon_ls','')
+    }
+})
 $('.changeImage').click(function(){
     
     let url =prompt('enter url img')
